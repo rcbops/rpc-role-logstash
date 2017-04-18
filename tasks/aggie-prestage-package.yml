@@ -1,0 +1,71 @@
+---
+# Copyright 2017, Rackspace US, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Create destination directory
+  file: 
+    path: "/opt/aggie_{{ aggie_release }}"
+    state: directory
+    owner: root
+    group: aggie
+    mode: 0750
+
+- name: Create the downloads directory
+  file:
+    path: /opt/downloads
+    mode: 0755
+    owner: root
+    group: aggie
+    state: directory
+
+- name: Download package if it doesn't already exist
+  get_url:
+    url: "{{ repo_uploads_loc }}/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz"
+    dest: "/opt/downloads/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz"
+    validate_certs: no
+  
+- name: Unpack the package to its versioned directory
+  shell: "tar -zxvf /opt/downloads/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz -C /opt/aggie_{{ aggie_release }}"
+  args:
+    creates: "/opt/aggie_{{ aggie_release }}/bin/aggie"
+
+- name: Create var directory writable by aggie
+  file: 
+    path: "/opt/aggie_{{ aggie_release }}/var"
+    state: directory
+    owner: root
+    group: aggie
+    mode: 0770
+
+- name: Fix the permissions on the binary and wrapper
+  file: 
+    path: "{{ item }}"
+    owner: root
+    group: aggie
+    mode: 0750
+  with_items:
+    - "/opt/aggie_{{ aggie_release }}/bin/aggie"
+    - "/opt/aggie_{{ aggie_release }}/releases/{{ aggie_release }}/aggie.sh"
+
+- name: Fix the permissions on any data files
+  file: 
+    path: "{{ item }}"
+    owner: root
+    group: aggie
+    mode: 0770
+  with_items:
+    - "/opt/aggie_{{ aggie_release }}/releases/start_erl.data"
+ 
+
+  
