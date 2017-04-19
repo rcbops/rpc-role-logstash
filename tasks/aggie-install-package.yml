@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Update /opt/aggie to point to the new version
-  file: 
+  file:
     src: "/opt/aggie_{{ aggie_release }}"
     path: "/opt/aggie"
     state: link

@@ -41,7 +41,7 @@
   shell: mix deps.get
   args:
     chdir: /opt/aggie_build/
-    
+
 - name: Build the package
   shell: MIX_ENV=prod mix release
   args:

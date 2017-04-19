@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Create destination directory
-  file: 
+  file:
     path: "/opt/aggie_{{ aggie_release }}"
     state: directory
     owner: root
@@ -34,14 +34,14 @@
     url: "{{ repo_uploads_loc }}/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz"
     dest: "/opt/downloads/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz"
     validate_certs: no
-  
+
 - name: Unpack the package to its versioned directory
   shell: "tar -zxvf /opt/downloads/aggie-{{ aggie_release }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.tar.gz -C /opt/aggie_{{ aggie_release }}"
   args:
     creates: "/opt/aggie_{{ aggie_release }}/bin/aggie"
 
 - name: Create var directory writable by aggie
-  file: 
+  file:
     path: "/opt/aggie_{{ aggie_release }}/var"
     state: directory
     owner: root
@@ -49,7 +49,7 @@
     mode: 0770
 
 - name: Fix the permissions on the binary and wrapper
-  file: 
+  file:
     path: "{{ item }}"
     owner: root
     group: aggie
@@ -59,13 +59,10 @@
     - "/opt/aggie_{{ aggie_release }}/releases/{{ aggie_release }}/aggie.sh"
 
 - name: Fix the permissions on any data files
-  file: 
+  file:
     path: "{{ item }}"
     owner: root
     group: aggie
     mode: 0770
   with_items:
     - "/opt/aggie_{{ aggie_release }}/releases/start_erl.data"
- 
-
-  

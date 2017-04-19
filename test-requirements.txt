@@ -1,0 +1,2 @@
+ansible-lint>=2.7.0,<3.0.0
+bashate>=0.2 # Apache-2.0
