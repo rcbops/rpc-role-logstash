@@ -28,7 +28,7 @@ the package from the local repo and deploy.
   - **source_elasticsearch_port**: '9200'
   - **source_elasticsearch_ip**: "{{ internal_lb_vip_address }}"
   - **dest_elasticsearch_port**: '9200'
-  - **build_locally**: "no"
+  - **build_on_destination**: "no"
   - **repo_uploads_loc**: "http://{{ internal_lb_vip_address }}:8181/uploads"
 
 
@@ -39,7 +39,7 @@ the package from the local repo and deploy.
 
 ### Common Overrides
 
-  - 'build_locally':  If the container has access to the internet and you don't need to go through the repo servers, 
+  - 'build_on_destination':  If the container has access to the internet and you don't need to go through the repo servers, 
                       You can set this to 'yes'.  When set to 'no' the aggie_build role will need to be run first
                       to build and upload a package to your repo servers.
 

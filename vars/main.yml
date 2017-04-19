@@ -7,5 +7,5 @@ source_elasticsearch_port: '9200'
 source_elasticsearch_ip: "{{ internal_lb_vip_address }}"
 dest_elasticsearch_port: '9200'
 
-build_locally: "no"
+build_on_destination: "no"
 repo_uploads_loc: "http://{{ internal_lb_vip_address }}:8181/uploads"
