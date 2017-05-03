@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Rackspace US, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,24 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: aggie-prepare-host.yml
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
   tags:
-    - aggie-prepare-host
+    - always
 
-- include: aggie-create-package.yml
+- include: upgrade_logstash_pre.yml
   tags:
-    - aggie-create-package
-  when: build_on_destination == "yes"
+    - logstash-upgrade
 
-- include: aggie-prestage-package.yml
+- include: logstash_pre_install.yml
   tags:
-    - aggie-prestage-package
+    - logstash-install
 
-- include: aggie-install-package.yml
+- include: logstash_install.yml
   tags:
-    - aggie-install-package
+    - logstash-install
 
-- include: aggie-config.yml
+- include: logstash_post_install.yml
   tags:
-    - aggie-config
-    - config
+    - logstash-config

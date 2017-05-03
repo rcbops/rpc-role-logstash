@@ -13,18 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-galaxy_info:
-  author: rcbops
-  description: Installation of Logstash
-  company: Rackspace
-  license: Apache2
-  min_ansible_version: 1.6.6
-  platforms:
-    - name: Ubuntu
-      versions:
-        - trusty
-  categories:
-    - rackspace
-    - logstash
+- name: Install apt packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  register: install_apt_packages
+  until: install_apt_packages|success
+  retries: 5
+  delay: 2
+  with_items: logstash_apt_packages
+  tags:
+    - logstash-apt-packages
 
-dependencies: []
+- name: Create patterns directory
+  file:
+    name: "/opt/logstash/patterns"
+    owner: "logstash"
+    group: "logstash"
+    state: directory
+  tags:
+    - logstash-patterns

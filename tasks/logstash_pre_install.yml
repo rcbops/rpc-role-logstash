@@ -13,18 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-galaxy_info:
-  author: rcbops
-  description: Installation of Logstash
-  company: Rackspace
-  license: Apache2
-  min_ansible_version: 1.6.6
-  platforms:
-    - name: Ubuntu
-      versions:
-        - trusty
-  categories:
-    - rackspace
-    - logstash
+- name: Add apt keys
+  apt_key:
+    url: "{{ item.url }}"
+    state: "{{ item.state }}"
+  with_items: "{{ logstash_apt_keys }}"
+  register: add_keys_url
+  until: add_keys_url | success
+  retries: 5
+  delay: 2
+  tags:
+    - logstash-apt-keys
 
-dependencies: []
+- name: Add apt repositories
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+    filename: "{{ item.filename | default(omit) }}"
+  with_items: "{{ logstash_apt_repos }}"
+  register: add_repos
+  until: add_repos | success
+  retries: 5
+  delay: 2
+  tags:
+    - logstash-apt-repos

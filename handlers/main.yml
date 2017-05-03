@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Rackspace US, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,19 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Create the config directory
-  file:
-    path: "/etc/aggie"
-    state: directory
-    owner: root
-    group: aggie
-    mode: 0750
-
-- name: Deploy config file template
-  template:
-    src: "aggie_config.j2"
-    dest: /etc/aggie/config
-    owner: root
-    group: aggie
-    mode: 0640
-
+- name: Restart Logstash
+  service:
+    name: logstash
+    state: restarted
+    enabled: yes
+    pattern: logstash

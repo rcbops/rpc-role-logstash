@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Rackspace US, Inc.
+# Copyright 2015, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,23 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Install erlang-solutions from url
-  apt:
-    deb: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-
-- name: Update apt cache and install elixir and esl-erlang
-  apt:
-    name: "{{ item }}"
-    update_cache: yes
-  with_items:
-    - esl-erlang
-    - elixir
-    - git
-
-- name: Set up an aggie user
-  user:
-    name: aggie
-    state: present
-    comment: "Aggie Script User"
-    shell: /bin/bash
-    uid: 1001
+# the apt packages to install
+logstash_apt_packages:
+  - logstash
+  - openjdk-8-jre-headless
