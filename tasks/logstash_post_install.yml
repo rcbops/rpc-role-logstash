@@ -60,6 +60,34 @@
     - logstash-filters
     - logstash-post-install
 
+- name: Deploy Logstash aggregation configuration files
+  template:
+    src: "{{ item }}"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: "root"
+    group: "root"
+  with_items:
+    - 99-log-aggregation.conf
+  notify: Restart Logstash
+  tags:
+    - logstash-filters
+    - logstash-post-install
+    - logstash-log-aggr
+  when: log_aggr_enable == True
+
+- name: Remove Logstash aggregation config files if disabled
+  file:
+    path: "/etc/logstash/conf.d/{{ item }}"
+    state: absent
+  with_items:
+    - 99-log-aggregation.conf
+  notify: Restart Logstash
+  tags:
+    - logstash-filters
+    - logstash-post-install
+    - logstash-log-aggr
+  when: log_aggr_enable == False
+
 - name: Logstash Tuning
   template:
     src: "{{ item }}"
