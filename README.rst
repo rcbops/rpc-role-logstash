@@ -58,4 +58,4 @@ Usage Example
       hosts: logstash_all
       user: root
       roles:
-        - role: "logstash"
+        - role: "rpc-role-logstash"
