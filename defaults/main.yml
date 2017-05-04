@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+####################
+# Apt Repo Defaults
+####################
+
 # the apt repository url to use for installing logstash from
 logstash_apt_repo_url: "http://packages.elastic.co/logstash/2.3/debian"
 
@@ -25,6 +29,10 @@ logstash_apt_repos:
 logstash_apt_keys:
   - url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
     state: "present"
+
+###############################################
+# Logstash Input/Output Configuration Defaults
+###############################################
 
 # the listening port for rsyslog events
 logstash_syslog_port: 5544
@@ -43,3 +51,24 @@ logstash_plugins:
 
 # use -e 'logging_upgrade=true' to upgrade logging components
 logging_upgrade: false
+
+
+####################################
+# Central Log Aggregation Defaults
+####################################
+
+# Disable by default
+log_aggr_enable: False
+
+# Centralized ElasticSearch IP
+log_aggr_central_es_host: SomeCentralElasticSearchVIP
+
+# Centralized ElasticSearch Port
+log_aggr_central_es_port: 9200
+
+# Enable if ssl terminated(should be true as we want customer logs secure in route)
+log_aggr_enable_ssl: True
+
+# Account id used to query logs for a specific customer
+log_aggr_account_id: 000000
+

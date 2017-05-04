@@ -1,6 +1,6 @@
 Ansible Logstash Role
 ######################
-:tags: rackspace, rpc, cloud, ansible, logstash
+:tags: cloud, ansible, logstash
 :category: \*nix
 
 Role for the deployment of Logstash within Rackspace Private Cloud.
@@ -16,6 +16,13 @@ Default variables in defaults/main.yml
 - **logstash-plugins**: Plugins needed for input/output entries. (logstash-input-beats needed for filbeat input entry)
 - **logging_upgrade**: Can set to true when running ansible to enable an upgrade of logstash.
 
+Variables used to push logs to a centralized location from several private cloud environments.
+
+- **log_aggr_enable**: Enables configuring logstash to push logs to a central elasticsearch server.(default: False)
+- **log_aggr_central_es_host**: Destination host of central elasticsearch server(Default: SomeCentralElasticSearchVIP)
+- **log_aggr_central_es_port**: Destination post of central elasticsearch server(Default: 9200)
+- **log_aggr_enable_ssl**: If setting behind an ssl terminated reverse proxy.(Default: True)
+- **log_aggr_account_id**: Customer account id. Used to search specific customer's logs.(Default: 000000)
 
 Variables used in vars/<distro-version>.yml files
 --------------------------------------------------
@@ -32,21 +39,6 @@ Used to determine which configs to look for in ./vars.
 - **ansible_distribution_version**
 - **ansible_distribution_major_version** 
 - **ansible_os_family**
-
-
-
-Logstash Aggregation Variables
-------------------------------
-
-Defaults defined in /etc/openstack_deploy/user_rpco_variables_defaults.yml and overridden in 
-/etc/openstack_deploy/user_rpco_variables_overrides.yml. 
-
-- **log_aggr_enable**: Enables configuring logstash to push logs to a central elasticsearch server.(default: False)
-- **log_aggr_central_es_host**: Destination host of central elasticsearch server(Default: SomeCentralElasticSearchVIP)
-- **log_aggr_central_es_port**: Destination post of central elasticsearch server(Default: 9200)
-- **log_aggr_enable_ssl**: If setting behind an ssl terminated reverse proxy.(Default: True)
-- **log_aggr_account_id**: Customer account id. Used to search specific customer's logs.(Default: 000000)
-
 
 
 
