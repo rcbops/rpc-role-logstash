@@ -23,6 +23,7 @@ Variables used to push logs to a centralized location from several private cloud
 - **log_aggr_central_es_port**: Destination post of central elasticsearch server(Default: 9200)
 - **log_aggr_enable_ssl**: If setting behind an ssl terminated reverse proxy.(Default: True)
 - **log_aggr_account_id**: Customer account id. Used to search specific customer's logs.(Default: 000000)
+- **log_aggr_filters_path**: Allow for a custom filter path for log aggregation. (Default: "{{ role_path }}/templates/log_aggr")
 
 Variables used in vars/<distro-version>.yml files
 --------------------------------------------------

@@ -63,11 +63,11 @@
 - name: Deploy Logstash aggregation configuration files
   template:
     src: "{{ item }}"
-    dest: "/etc/logstash/conf.d/{{ item }}"
+    dest: "/etc/logstash/conf.d/{{ item | basename }}"
     owner: "root"
     group: "root"
-  with_items:
-    - 99-log-aggregation.conf
+  with_fileglob:
+    - "{{ log_aggr_filters_path }}/*.conf"
   notify: Restart Logstash
   tags:
     - logstash-filters
@@ -77,10 +77,10 @@
 
 - name: Remove Logstash aggregation config files if disabled
   file:
-    path: "/etc/logstash/conf.d/{{ item }}"
+    path: "/etc/logstash/conf.d/{{ item | basename }}"
     state: absent
-  with_items:
-    - 99-log-aggregation.conf
+  with_fileglob:
+    - "{{ log_aggr_filters_path }}/*.conf"
   notify: Restart Logstash
   tags:
     - logstash-filters
