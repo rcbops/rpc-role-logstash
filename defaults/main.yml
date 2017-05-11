@@ -18,7 +18,7 @@
 ####################
 
 # the apt repository url to use for installing logstash from
-logstash_apt_repo_url: "http://packages.elastic.co/logstash/2.3/debian"
+logstash_apt_repo_url: "http://artifacts.elastic.co/logstash/5.x/apt"
 
 # the apt repository to use for installing logstash from
 logstash_apt_repos:
@@ -27,7 +27,7 @@ logstash_apt_repos:
 
 # the apt repository key url
 logstash_apt_keys:
-  - url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+  - url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
     state: "present"
 
 ###############################################
