@@ -18,7 +18,7 @@
 ####################
 
 # the apt repository url to use for installing logstash from
-logstash_apt_repo_url: "http://artifacts.elastic.co/logstash/5.x/apt"
+logstash_apt_repo_url: "http://artifacts.elastic.co/packages/5.x/apt"
 
 # the apt repository to use for installing logstash from
 logstash_apt_repos:
