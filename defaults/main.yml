@@ -75,3 +75,7 @@ log_aggr_account_id: 000000
 
 # Set the path to the log aggregation logstash filters to allow overrides 
 log_aggr_filters_path: "{{ role_path }}/templates/log_aggr"
+
+# Set up a pipeline to use for things like tagging logs during a maintenance
+log_aggr_pipeline: "log-aggr-pipeline"
+

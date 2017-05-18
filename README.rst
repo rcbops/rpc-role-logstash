@@ -12,8 +12,8 @@ Default variables in defaults/main.yml
 - **logstash_syslog_port**: Logstash input port to listen for rsyslog events(default: 5544)
 - **logstash_tcp_port**: Logstash input port listen for tcp/json events(default: 5140)
 - **logstash_beats_port**: Logstash input port to listen for filebeat events(default: 5044) 
-- **elsaticsearch_host**: Logstash output host for local elasticsearch services(default: localhost)
-- **elsaticsearch_tcp_port**: Logstash output port for local elasticsearch services(default: 9200)
+- **elasticsearch_host**: Logstash output host for local elasticsearch services(default: localhost)
+- **elasticsearch_tcp_port**: Logstash output port for local elasticsearch services(default: 9200)
 - **logstash-plugins**: Plugins needed for input/output entries. (logstash-input-beats needed for filbeat input entry)
 - **logging_upgrade**: Can set to true when running ansible to enable an upgrade of logstash.
 
