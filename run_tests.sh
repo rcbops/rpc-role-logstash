@@ -374,6 +374,15 @@ function runTests {
 
 }
 
+######################
+# Artifact Workaround
+######################
+function artifactWorkaround {
+
+    pip uninstall -y ansible 
+    apt-get remove -y ansible --purge
+}
+
 
 #######
 # Main
@@ -399,6 +408,9 @@ installFilebeat
 
 # Run all the tests
 runTests
+
+# Artifact run workaround
+artifactWorkaround
 
 # If we make it this far, exit with a success
 exit 0
