@@ -374,6 +374,18 @@ function runTests {
 
 }
 
+######################
+# Artifact Workaround
+######################
+function artifactWorkaround {
+
+    logIt 'INFO' 'Removing ansible on trusty as it causes issues with post scripts'
+    if [ "$DISTRIB_CODENAME" == "trusty" ] ; then
+        pip uninstall -y ansible > /dev/null 2>&1
+        apt-get remove -y ansible --purge > /dev/null 2>&1
+    fi
+}
+
 
 #######
 # Main
@@ -399,6 +411,9 @@ installFilebeat
 
 # Run all the tests
 runTests
+
+# Artifact run workaround
+artifactWorkaround
 
 # If we make it this far, exit with a success
 exit 0
