@@ -53,6 +53,9 @@ logstash_plugins:
 # use -e 'logging_upgrade=true' to upgrade logging components
 logging_upgrade: false
 
+# Default location for logstash-plugin command
+logstash_plugin_command: "/usr/share/logstash/bin/logstash-plugin"
+
 
 ####################################
 # Central Log Aggregation Defaults
