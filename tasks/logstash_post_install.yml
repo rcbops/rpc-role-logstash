@@ -120,10 +120,21 @@
   tags:
     - logstash-post-install
 
+- name: Check logstash-plugin path for older installs
+  stat:
+    path=/opt/logstash/bin/logstash-plugin
+  register: lpfile
+
+- name: Set older logstash-plugin path
+  set_fact:
+    logstash_plugin_command: "/opt/logstash/bin/logstash-plugin"
+  when: lpfile.stat.exists
+
 - name: Enable Logstash Plugins
-  command: "/usr/share/logstash/bin/logstash-plugin install {{ item }}"
+  command: "{{ logstash_plugin_command }} install {{ item }}"
   with_items: "{{ logstash_plugins }}"
   notify: Restart Logstash
   tags:
     - logstash-plugins
     - logstash-post-install
+
