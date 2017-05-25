@@ -52,6 +52,6 @@ Usage Example
       hosts: logstash_all
       user: root
       vars:
-        - elasticsearch_host: hostvars[groups['elasticsearch'][0]]['container_address']
+        - elasticsearch_host: "{{ hostvars[groups['elasticsearch'][0]]['container_address'] }}"
       roles:
         - role: "rpc-role-logstash"
