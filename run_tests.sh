@@ -109,7 +109,7 @@ function installElasticSearch {
             apt-get update > /dev/null 2>&1
             echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
             echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-            apt-get install -y openjdk-8-jre-headless > /dev/null 2>&1
+            apt-get install -y oracle-java8-installer > /dev/null 2>&1
         fi
     fi
 
