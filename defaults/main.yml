@@ -44,6 +44,7 @@ logstash_tcp_port: 5140
 logstash_beats_port: 5044
 
 # the target elasticsearch cluster settings
+elasticsearch_host: "localhost"
 elasticsearch_tcp_port: 9200
 
 logstash_plugins:
@@ -51,6 +52,9 @@ logstash_plugins:
 
 # use -e 'logging_upgrade=true' to upgrade logging components
 logging_upgrade: false
+
+# Default location for logstash-plugin command
+logstash_plugin_command: "/usr/share/logstash/bin/logstash-plugin"
 
 
 ####################################
@@ -74,3 +78,7 @@ log_aggr_account_id: 000000
 
 # Set the path to the log aggregation logstash filters to allow overrides 
 log_aggr_filters_path: "{{ role_path }}/templates/log_aggr"
+
+# Set up a pipeline to use for things like tagging logs during a maintenance
+log_aggr_pipeline: "log-aggr-pipeline"
+
