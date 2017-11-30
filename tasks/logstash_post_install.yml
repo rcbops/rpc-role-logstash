@@ -137,4 +137,4 @@
   tags:
     - logstash-plugins
     - logstash-post-install
-
+    - skip_ansible_lint

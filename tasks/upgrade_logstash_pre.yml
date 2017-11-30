@@ -19,6 +19,8 @@
   register: logstash_legacy_conf
   when:
     - logging_upgrade | bool
+  tags:
+    - skip_ansible_lint
 
 - name: Remove legacy logstash configuration files
   file:
@@ -33,6 +35,8 @@
   register: logstash_legacy_patterns
   when:
     - logging_upgrade | bool
+  tags:
+    - skip_ansible_lint
 
 - name: Remove legacy logstash patterns
   file:
@@ -41,4 +45,3 @@
   with_items: "{{ logstash_legacy_conf.stdout_lines | default([]) }}"
   when:
     - logging_upgrade | bool
-
