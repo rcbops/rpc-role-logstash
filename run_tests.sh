@@ -1,1 +1,1 @@
-gating/pre_merge_test/run
+gating/pre_merge_test/run_functional.sh
