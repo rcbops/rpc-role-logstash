@@ -18,7 +18,7 @@
 ####################
 
 # the apt repository url to use for installing logstash from
-logstash_apt_repo_url: "http://artifacts.elastic.co/packages/5.x/apt"
+logstash_apt_repo_url: "http://artifacts.elastic.co/packages/6.x/apt"
 
 # the apt repository to use for installing logstash from
 logstash_apt_repos:
@@ -76,9 +76,8 @@ log_aggr_enable_ssl: True
 # Account id used to query logs for a specific customer
 log_aggr_account_id: 000000
 
-# Set the path to the log aggregation logstash filters to allow overrides 
+# Set the path to the log aggregation logstash filters to allow overrides
 log_aggr_filters_path: "{{ role_path }}/templates/log_aggr"
 
 # Set up a pipeline to use for things like tagging logs during a maintenance
 log_aggr_pipeline: "log-aggr-pipeline"
-
