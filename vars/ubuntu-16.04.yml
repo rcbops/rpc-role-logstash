@@ -15,5 +15,5 @@
 
 # the apt packages to install
 logstash_apt_packages:
-  - logstash
   - openjdk-8-jre-headless
+  - logstash
