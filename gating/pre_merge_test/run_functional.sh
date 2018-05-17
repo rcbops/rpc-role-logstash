@@ -121,7 +121,7 @@ function installElasticSearch {
     fi
 
 
-    # Enable if not 
+    # Enable if not
     if [ "$DISTRIB_CODENAME" == "xenial" ] ; then
         systemctl status elasticsearch > /dev/null 2>&1
     else
@@ -167,7 +167,7 @@ EOF
     if [ $? != 0 ] ; then
 
         logIt 'INFO' 'Setting up ElasticSearch Pipeline for testing'
-        curl http://localhost:9200/_ingest/pipeline/log-aggr-pipeline -XPUT -d @/tmp/pipeline.json > /dev/null 2>&1
+        curl http://localhost:9200/_ingest/pipeline/log-aggr-pipeline -H 'Content-Type: application/json' -XPUT -d @/tmp/pipeline.json > /dev/null 2>&1
 
         curl -s http://localhost:9200/_ingest/pipeline/log-aggr-pipeline -XGET 2>/dev/null | grep 'from_pipeline' > /dev/null 2>&1
         if [ $? != 0 ] ; then
@@ -193,7 +193,7 @@ function installFilebeat {
     fi
 
 
-    # Enable if not 
+    # Enable if not
     if [ "$DISTRIB_CODENAME" == "xenial" ] ; then
         systemctl status filebeat > /dev/null 2>&1
     else
