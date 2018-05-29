@@ -27,7 +27,7 @@ function installDeps {
 
     # Check if already installed
     INST_LIST=""
-    for DEP in ansible curl netcat-openbsd python-pip python-dev build-essential; do
+    for DEP in ansible curl netcat-openbsd python-pip python-dev build-essential apt-transport-https; do
         dpkg -s $DEP > /dev/null 2>&1
         if [ $? != 0 ] ; then
         INST_LIST="${INST_LIST}$DEP "
